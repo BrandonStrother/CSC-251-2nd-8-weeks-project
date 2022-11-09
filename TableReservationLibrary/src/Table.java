@@ -14,14 +14,16 @@ import java.util.List;
  */
 public class Table
 {
-    private int id; 
     private int numSeats; 
-    private int getNumSeats;
+    private int people;
+    private int chairsNeeded;
+    private int getNumTables;
 
-    public Table(int id, int numSeats) { 
-        this.id = id;
-        this.numSeats = numSeats; 
+    public Table(int people , int numSeats, int chairsNeeded) { 
+        this.numSeats = numSeats;
+        this.people = people;
+        this.chairsNeeded = chairsNeeded;
     }
-    public int getId() { return this.id; }
-    public int getNumSeats() { return this.getNumSeats; }
+    public int getPeople() { return this.people; }
+    public int getNumTables() { return this.getNumTables; }
 }
