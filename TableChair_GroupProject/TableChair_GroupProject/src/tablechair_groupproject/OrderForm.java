@@ -54,9 +54,9 @@ public class OrderForm
         jLabel9 = new javax.swing.JLabel();
         paymentType_Box = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
-        tipPercent_Box = new javax.swing.JComboBox<>();
+        dicountPercent_Box = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
-        table_numTF = new javax.swing.JTextField();
+        num_tablesTF = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,6 +88,8 @@ public class OrderForm
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Shipping");
 
+        num_chairsTF.setText("0");
+
         jLabel4.setText("Promo codes");
 
         promo_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Military", "Student", "Senior" }));
@@ -107,11 +109,13 @@ public class OrderForm
 
         paymentType_Box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Credit", "Debit" }));
 
-        jLabel10.setText("Tip?");
+        jLabel10.setText("Discount");
 
-        tipPercent_Box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10%", "15%", "20%" }));
+        dicountPercent_Box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10%", "15%", "20%" }));
 
         jLabel11.setText("How many tables will you need?");
+
+        num_tablesTF.setText("0");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -132,15 +136,16 @@ public class OrderForm
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addComponent(jLabel2))
-                            .addComponent(jLabel9)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(49, 49, 49)
-                                .addComponent(jLabel10)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel10)
+                                .addComponent(jLabel9)
+                                .addComponent(jLabel4)))
                         .addGap(73, 73, 73)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(paymentType_Box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tipPercent_Box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 27, Short.MAX_VALUE)))
+                            .addComponent(dicountPercent_Box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(promo_box, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 11, Short.MAX_VALUE)))
                 .addGap(91, 91, 91))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,25 +153,18 @@ public class OrderForm
                         .addGap(162, 162, 162)
                         .addComponent(Order_Form))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel4))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(193, 193, 193)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
                             .addComponent(jLabel3)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
+                        .addGap(246, 246, 246)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(promo_box, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(69, 69, 69)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(distanceTF, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Order_addressTF, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(139, 139, 139)
-                                .addComponent(shipping_typeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(distanceTF, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Order_addressTF, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(246, 246, 246)
+                        .addComponent(shipping_typeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -176,18 +174,13 @@ public class OrderForm
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel11)
-                                        .addGap(28, 28, 28))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(20, 20, 20)))))
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(order_nameTF)
-                            .addComponent(table_numTF)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(num_chairsTF, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(num_tablesTF)
+                            .addComponent(num_chairsTF, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -206,7 +199,7 @@ public class OrderForm
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(table_numTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(num_tablesTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22)
@@ -230,12 +223,12 @@ public class OrderForm
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(tipPercent_Box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                    .addComponent(dicountPercent_Box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(promo_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(promo_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(submitOrder)
                     .addComponent(quit))
@@ -251,26 +244,44 @@ public class OrderForm
         String shipping_address;
         double distance;
         int num_chairs;
+        int num_tables;
         int getNumTables;
+        int getNumChairs;
         double total;
+        double discount;
+        
         order_name = order_nameTF.getText();
         num_chairs = Integer.parseInt(num_chairsTF.getText());
+        num_tables = Integer.parseInt(num_tablesTF.getText());
         shipping_address = Order_addressTF.getText();
         distance = Double.parseDouble(distanceTF.getText());
-        getNumTables = ((num_chairs)/2) -1;
-        System.out.println(getNumTables);
+        //discount = (int)dicountPercent_Box.getSelectedItem();
+        if (num_chairs == 0)
+        {
+            getNumChairs = ((num_tables)*2) +2;
+            num_chairs = getNumChairs;
+        }
+        if (num_tables == 0)
+        {
+            getNumTables = ((num_chairs)/2) -1;
+            num_tables = getNumTables;
+            
+        }
         
         
         
         
-        total = num_chairs * 10 + getNumTables * 20;
-        dispose();
+        
+        total = num_chairs * 10 + num_tables * 20;
+        //System.out.println(discount);
         JOptionPane.showMessageDialog(null, "Thank you " + order_name + "\n"
+                + "You have ordered " + num_chairs + " chairs" + "\n"
+                + "You have ordered " + num_tables + " tables" + "\n"
                 + "Address: " + shipping_address + "\n"
                 + "Distance to venue in miles: " + distance + "\n"
                 + "The total for this order is $"+ String.format("%.2f", total));
         
-        
+        dispose();
     
         
     }//GEN-LAST:event_submitOrderActionPerformed
@@ -346,6 +357,7 @@ public class OrderForm
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Order_Form;
     private javax.swing.JTextField Order_addressTF;
+    private javax.swing.JComboBox<String> dicountPercent_Box;
     private javax.swing.JTextField distanceTF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -359,13 +371,12 @@ public class OrderForm
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField num_chairsTF;
+    private javax.swing.JTextField num_tablesTF;
     private javax.swing.JTextField order_nameTF;
     private javax.swing.JComboBox<String> paymentType_Box;
     private javax.swing.JComboBox<String> promo_box;
     private javax.swing.JButton quit;
     private javax.swing.JComboBox<String> shipping_typeBox;
     private javax.swing.JButton submitOrder;
-    private javax.swing.JTextField table_numTF;
-    private javax.swing.JComboBox<String> tipPercent_Box;
     // End of variables declaration//GEN-END:variables
 }
