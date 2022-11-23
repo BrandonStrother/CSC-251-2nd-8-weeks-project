@@ -54,7 +54,7 @@ public class OrderForm
         jLabel9 = new javax.swing.JLabel();
         paymentType_Box = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
-        dicountPercent_Box = new javax.swing.JComboBox<>();
+        discountPercent_Box = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         num_tablesTF = new javax.swing.JTextField();
 
@@ -111,7 +111,7 @@ public class OrderForm
 
         jLabel10.setText("Discount");
 
-        dicountPercent_Box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10%", "15%", "20%" }));
+        discountPercent_Box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { ".10", ".15", ".20" }));
 
         jLabel11.setText("How many tables will you need?");
 
@@ -143,7 +143,7 @@ public class OrderForm
                         .addGap(73, 73, 73)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(paymentType_Box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dicountPercent_Box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(discountPercent_Box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(promo_box, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 11, Short.MAX_VALUE)))
                 .addGap(91, 91, 91))
@@ -159,11 +159,6 @@ public class OrderForm
                             .addComponent(jLabel3)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(246, 246, 246)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(distanceTF, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Order_addressTF, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(246, 246, 246)
                         .addComponent(shipping_typeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,14 +168,19 @@ public class OrderForm
                                 .addGap(78, 78, 78))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(35, 35, 35)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(order_nameTF)
                             .addComponent(num_tablesTF)
-                            .addComponent(num_chairsTF, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(num_chairsTF, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(246, 246, 246)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(distanceTF, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Order_addressTF, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -223,7 +223,7 @@ public class OrderForm
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(dicountPercent_Box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(discountPercent_Box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(promo_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -249,13 +249,16 @@ public class OrderForm
         int getNumChairs;
         double total;
         double discount;
+        double tenOff;
+        /*double fifteenOff;
+        double twentyOff;*/
         
         order_name = order_nameTF.getText();
         num_chairs = Integer.parseInt(num_chairsTF.getText());
         num_tables = Integer.parseInt(num_tablesTF.getText());
         shipping_address = Order_addressTF.getText();
         distance = Double.parseDouble(distanceTF.getText());
-        //discount = (int)dicountPercent_Box.getSelectedItem();
+        discount = Double.parseDouble(discountPercent_Box.getSelectedItem().toString());
         if (num_chairs == 0)
         {
             getNumChairs = ((num_tables)*2) +2;
@@ -268,12 +271,25 @@ public class OrderForm
             
         }
         
-        
-        
-        
-        
         total = num_chairs * 10 + num_tables * 20;
-        //System.out.println(discount);
+        
+        if (discount == .1){
+            tenOff = total * .10;
+            double totalTenOff = total - tenOff;
+        }
+        
+        /*else if (discount == .15){
+            fifteenOff = total * .15;
+            double totalfifteenOff = total - fifteenOff;
+        }
+        
+        else if (discount == .20){
+            twentyOff = total * .20;
+            double totalTwentyOff = total - twentyOff;
+        }*/
+        
+        System.out.println(discount);
+        
         JOptionPane.showMessageDialog(null, "Thank you " + order_name + "\n"
                 + "You have ordered " + num_chairs + " chairs" + "\n"
                 + "You have ordered " + num_tables + " tables" + "\n"
@@ -357,7 +373,7 @@ public class OrderForm
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Order_Form;
     private javax.swing.JTextField Order_addressTF;
-    private javax.swing.JComboBox<String> dicountPercent_Box;
+    private javax.swing.JComboBox<String> discountPercent_Box;
     private javax.swing.JTextField distanceTF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
