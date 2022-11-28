@@ -1,0 +1,6 @@
+Thank you null
+You have ordered 0 chairs
+You have ordered 0 tables
+Address: null
+Distance to venue in miles: 0.0
+The total for this order is $0.00

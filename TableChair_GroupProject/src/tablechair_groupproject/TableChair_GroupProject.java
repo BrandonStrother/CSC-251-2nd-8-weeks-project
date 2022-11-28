@@ -71,6 +71,7 @@ public class TableChair_GroupProject
                 + "Address: " + shipping_address + "\n"
                 + "Distance to venue in miles: " + distance + "\n"
                 + "The total for this order is $"+ String.format("%.2f", total));
+        outputfile.close();
         }
     
 }
