@@ -308,7 +308,7 @@ public class OrderForm
         
     }//GEN-LAST:event_submitOrderActionPerformed
     
-    public static void print(String order_name,double distance, String shipping_address,int num_tables, int num_chairs, double total) throws IOException{
+    public static void print(String order_name,double distance, String shipping_address,int num_chairs, int num_tables, double total) throws IOException{
         PrintWriter outputfile = new PrintWriter(order_name+" Billing.txt");
         outputfile.println("Thank you " + order_name + "\n"
                 + "You have ordered " + num_chairs + " chairs" + "\n"
