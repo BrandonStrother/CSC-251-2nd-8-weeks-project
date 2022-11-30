@@ -303,7 +303,7 @@ public class OrderForm
         dispose();
     
         try {
-            print(order_name, distance, shipping_address, num_chairs, num_tables, total);
+            print(order_name, distance, shipping_address, shipping_type, num_chairs, num_tables, total);
         } 
         catch (IOException ex) {
             Logger.getLogger(OrderForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -311,12 +311,13 @@ public class OrderForm
         
     }//GEN-LAST:event_submitOrderActionPerformed
     
-    public static void print(String order_name,double distance, String shipping_address,int num_chairs, int num_tables, double total) throws IOException{
+    public static void print(String order_name,double distance, String shipping_address, String shipping_type,int num_chairs, int num_tables, double total) throws IOException{
         PrintWriter outputfile = new PrintWriter(order_name+" Billing.txt");
         outputfile.println("Thank you " + order_name + "\n"
                 + "You have ordered " + num_chairs + " chairs" + "\n"
                 + "You have ordered " + num_tables + " tables" + "\n"
                 + "Address: " + shipping_address + "\n"
+                + "Shipping Type: " + shipping_type + "\n"
                 + "Distance to venue in miles: " + distance + "\n"
                 + "The total for this order is $"+ String.format("%.2f", total));
         outputfile.close();
