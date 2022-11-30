@@ -9,6 +9,13 @@ package tablechair_groupproject;
  *
  * @author strotheb6455
  */
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
+
 public class OrderForm
         extends javax.swing.JFrame
 {
@@ -37,23 +44,24 @@ public class OrderForm
         Order_Form = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        num_people = new javax.swing.JTextField();
+        num_chairsTF = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         promo_box = new javax.swing.JComboBox<>();
-        shipping_type = new javax.swing.JComboBox<>();
+        shipping_typeBox = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        Distance = new javax.swing.JTextField();
+        distanceTF = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        order_name = new javax.swing.JTextField();
-        Order_address = new javax.swing.JTextField();
+        order_nameTF = new javax.swing.JTextField();
+        Order_addressTF = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel10 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        paymentType_Box = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        num_tablesTF = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(30, 198, 79));
 
         submitOrder.setText("Submit");
         submitOrder.addActionListener(new java.awt.event.ActionListener()
@@ -73,7 +81,7 @@ public class OrderForm
             }
         });
 
-        jLabel1.setText("How many people are you ordering for?");
+        jLabel1.setText("How many chairs will you need?");
 
         Order_Form.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         Order_Form.setText("Order Form");
@@ -83,13 +91,15 @@ public class OrderForm
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Shipping");
 
+        num_chairsTF.setText("0");
+
         jLabel4.setText("Promo codes");
 
-        promo_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Military", "Student", "Senior" }));
+        promo_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Military", "Student", "Senior" }));
 
-        shipping_type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 Day Shipping", "2 Day Shipping", "Free Shipping - 5 Day", "Pick Up" }));
+        shipping_typeBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 Day Shipping", "2 Day Shipping", "Free Shipping - 5 Day", "Pick Up" }));
 
-        jLabel5.setText("Distance to Venue");
+        jLabel5.setText("Distance to Venue in miles");
 
         jLabel6.setText("Shipping Address");
 
@@ -100,11 +110,11 @@ public class OrderForm
 
         jLabel9.setText("Payment Type");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Credit", "Debit" }));
+        paymentType_Box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Credit", "Debit" }));
 
-        jLabel10.setText("Tip?");
+        jLabel11.setText("How many tables will you need?");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10%", "15%", "20%" }));
+        num_tablesTF.setText("0");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,28 +122,27 @@ public class OrderForm
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(submitOrder)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(quit))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(82, 82, 82)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addComponent(jLabel2))
-                            .addComponent(jLabel9)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(49, 49, 49)
-                                .addComponent(jLabel10)))
-                        .addGap(73, 73, 73)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 53, Short.MAX_VALUE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel2)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel9))))
+                        .addGap(50, 50, 50)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(paymentType_Box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(promo_box, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 23, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addComponent(submitOrder)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(quit)))
                 .addGap(91, 91, 91))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,37 +150,34 @@ public class OrderForm
                         .addGap(162, 162, 162)
                         .addComponent(Order_Form))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(74, 74, 74)
-                                .addComponent(jLabel7))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel1)))
-                        .addGap(47, 47, 47)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(num_people, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(order_name, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(193, 193, 193)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
                             .addComponent(jLabel3)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
+                        .addGap(246, 246, 246)
+                        .addComponent(shipping_typeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(promo_box, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(69, 69, 69)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(Order_address, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
-                                    .addComponent(Distance)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(139, 139, 139)
-                                .addComponent(shipping_type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(74, 74, 74)
+                                .addComponent(jLabel7)
+                                .addGap(78, 78, 78))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(35, 35, 35)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(order_nameTF)
+                            .addComponent(num_tablesTF)
+                            .addComponent(num_chairsTF, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(246, 246, 246)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(distanceTF, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Order_addressTF, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -182,44 +188,48 @@ public class OrderForm
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(order_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(order_nameTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(num_people, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
+                    .addComponent(num_chairsTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(num_tablesTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(Order_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Order_addressTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(Distance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(distanceTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(shipping_type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(shipping_typeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addComponent(jLabel8)
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(promo_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(submitOrder)
-                    .addComponent(quit))
-                .addGap(37, 37, 37))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(paymentType_Box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(promo_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(37, 143, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(submitOrder)
+                            .addComponent(quit))
+                        .addGap(58, 58, 58))))
         );
 
         pack();
@@ -227,14 +237,98 @@ public class OrderForm
 
     private void submitOrderActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_submitOrderActionPerformed
     {//GEN-HEADEREND:event_submitOrderActionPerformed
-        // TODO add your handling code here:
+        String order_name;
+        String shipping_address;
+        String discount;
+        String shipping_type;
+        double distance;
+        int num_chairs;
+        int num_tables;
+        int getNumTables;
+        int getNumChairs;
+        double total;
+        double tenOff;
+        double fifteenOff;
+        double twentyOff;
+        
+        order_name = order_nameTF.getText();
+        num_chairs = Integer.parseInt(num_chairsTF.getText());
+        num_tables = Integer.parseInt(num_tablesTF.getText());
+        shipping_address = Order_addressTF.getText();
+        distance = Double.parseDouble(distanceTF.getText());
+        discount = String.valueOf(promo_box.getSelectedItem());
+        shipping_type = String.valueOf(shipping_typeBox.getSelectedItem().toString());
+        if (num_chairs == 0)
+        {
+            getNumChairs = ((num_tables)*2) +2;
+            num_chairs = getNumChairs;
+        }
+        if (num_tables == 0)
+        {
+            getNumTables = ((num_chairs)/2) -1;
+            num_tables = getNumTables;
+            
+        }
+        
+        total = num_chairs * 10 + num_tables * 20;
+        
+        if (discount == "Military"){
+            tenOff = total * .10;
+            total = total - tenOff;
+        }
+        
+        else if (discount == "Student"){
+            fifteenOff = total * .15;
+            total = total - fifteenOff;
+        }
+        
+        else if (discount == "Senior"){
+            twentyOff = total * .20;
+            total = total - twentyOff;
+        }
+        else{
+            
+        }
+        
+        
+        
+        JOptionPane.showMessageDialog(null, "Thank you " + order_name + "\n"
+                + "You have ordered " + num_chairs + " chairs" + "\n"
+                + "You have ordered " + num_tables + " tables" + "\n"
+                + "Address: " + shipping_address + "\n"
+                + "Shipping Type: " + shipping_type + "\n"
+                + "Distance to venue in miles: " + distance + "\n"
+                + "The total for this order is $"+ String.format("%.2f", total));
+        
+        dispose();
+    
+        try {
+            print(order_name, distance, shipping_address, shipping_type, num_chairs, num_tables, total);
+        } 
+        catch (IOException ex) {
+            Logger.getLogger(OrderForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_submitOrderActionPerformed
+    
+    public static void print(String order_name,double distance, String shipping_address, String shipping_type,int num_chairs, int num_tables, double total) throws IOException{
+        PrintWriter outputfile = new PrintWriter(order_name+" Billing.txt");
+        outputfile.println("Thank you " + order_name + "\n"
+                + "You have ordered " + num_chairs + " chairs" + "\n"
+                + "You have ordered " + num_tables + " tables" + "\n"
+                + "Address: " + shipping_address + "\n"
+                + "Shipping Type: " + shipping_type + "\n"
+                + "Distance to venue in miles: " + distance + "\n"
+                + "The total for this order is $"+ String.format("%.2f", total));
+        outputfile.close();
+        }
 
     private void quitActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_quitActionPerformed
     {//GEN-HEADEREND:event_quitActionPerformed
         dispose();
     }//GEN-LAST:event_quitActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */
@@ -298,13 +392,11 @@ public class OrderForm
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Distance;
     private javax.swing.JLabel Order_Form;
-    private javax.swing.JTextField Order_address;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JTextField Order_addressTF;
+    private javax.swing.JTextField distanceTF;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -313,11 +405,13 @@ public class OrderForm
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField num_people;
-    private javax.swing.JTextField order_name;
+    private javax.swing.JTextField num_chairsTF;
+    private javax.swing.JTextField num_tablesTF;
+    private javax.swing.JTextField order_nameTF;
+    private javax.swing.JComboBox<String> paymentType_Box;
     private javax.swing.JComboBox<String> promo_box;
     private javax.swing.JButton quit;
-    private javax.swing.JComboBox<String> shipping_type;
+    private javax.swing.JComboBox<String> shipping_typeBox;
     private javax.swing.JButton submitOrder;
     // End of variables declaration//GEN-END:variables
 }

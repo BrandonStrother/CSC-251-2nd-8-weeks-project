@@ -5,6 +5,12 @@
  */
 package tablechair_groupproject;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
 /**
  *
  * @author strotheb6455
@@ -17,7 +23,8 @@ public class TableChair_GroupProject
      */
     public static void main(String[] args)
     {
-        // TODO code application logic here
-    }
+        new OrderForm().setVisible(true);
+    }   
+     
     
 }
