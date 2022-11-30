@@ -1,0 +1,6 @@
+Thank you bana
+You have ordered 0 chairs
+You have ordered 3 tables
+Address: asdf
+Distance to venue in miles: 3.0
+The total for this order is $30.00
