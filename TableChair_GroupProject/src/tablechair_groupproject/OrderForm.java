@@ -240,6 +240,7 @@ public class OrderForm
         String order_name;
         String shipping_address;
         String discount;
+        String shipping_type;
         double distance;
         int num_chairs;
         int num_tables;
@@ -256,6 +257,7 @@ public class OrderForm
         shipping_address = Order_addressTF.getText();
         distance = Double.parseDouble(distanceTF.getText());
         discount = String.valueOf(promo_box.getSelectedItem());
+        shipping_type = String.valueOf(shipping_typeBox.getSelectedItem().toString());
         if (num_chairs == 0)
         {
             getNumChairs = ((num_tables)*2) +2;
@@ -294,6 +296,7 @@ public class OrderForm
                 + "You have ordered " + num_chairs + " chairs" + "\n"
                 + "You have ordered " + num_tables + " tables" + "\n"
                 + "Address: " + shipping_address + "\n"
+                + "Shipping Type: " + shipping_type + "\n"
                 + "Distance to venue in miles: " + distance + "\n"
                 + "The total for this order is $"+ String.format("%.2f", total));
         

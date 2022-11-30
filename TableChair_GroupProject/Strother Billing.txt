@@ -1,0 +1,6 @@
+Thank you Strother
+You have ordered 134 chairs
+You have ordered 46 tables
+Address: 123 Orange st.
+Distance to venue in miles: 4.0
+The total for this order is $2260.00

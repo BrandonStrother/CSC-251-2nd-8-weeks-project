@@ -1,0 +1,6 @@
+Thank you Steve
+You have ordered 2 chairs
+You have ordered 0 tables
+Address: asdf
+Distance to venue in miles: 4.0
+The total for this order is $20.00
